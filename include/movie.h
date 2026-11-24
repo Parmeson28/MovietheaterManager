@@ -3,12 +3,13 @@
 
 #include <stdint.h>
 
-typedef struct{
-  uint8_t id;
-  char * nome;
-  uint8_t idade_min;
-  uint8_t qnt_publico;
-  uint8_t dia_semana; // 1 = domingo
-} Filme;
+typedef struct {
+    uint8_t id;
+    char *name;
+    uint8_t min_age;
+    uint8_t audience_count;
+    uint8_t weekday; 
+} Movie;
 
-void imprimir_filme(Filme * filme);
+void print_movie(Movie * movie);
+#endif
