@@ -20,6 +20,17 @@ int init_movie_catalog(MovieCatalog *catalog, size_t initial_capacity) {
     return 0;
 }
 
+void free_movie_catalog(MovieCatalog *catalog) {
+    if (catalog == NULL) {
+        return;
+    }
+
+    free(catalog->items);
+    catalog->items = NULL;
+    catalog->count = 0;
+    catalog->capacity = 0;
+}
+
 void print_movie(const Movie *movie) {
     if (movie == NULL) {
         printf("Invalid movie (NULL)\n");
