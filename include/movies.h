@@ -13,5 +13,10 @@ typedef struct {
     uint16_t total_audience;
 } Movie;
 
-void print_movie(Movie * movie);
+int init_movie_catalog(MovieCatalog *catalog, size_t initial_capacity);
+void free_movie_catalog(MovieCatalog *catalog);
+int add_movie(MovieCatalog *catalog, char *name, int min_age);
+Movie *find_movie_by_id(MovieCatalog *catalog, int id);
+void print_movie(Movie *movie);
+
 #endif
