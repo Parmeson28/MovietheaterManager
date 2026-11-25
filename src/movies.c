@@ -1,5 +1,24 @@
-#include "movie.h"
+#include "movies.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int init_movie_catalog(MovieCatalog *catalog, size_t initial_capacity) {
+    if (catalog == NULL || initial_capacity == 0) {
+        return -1;
+    }
+
+    catalog->items = calloc(initial_capacity, sizeof(Movie));
+    if (catalog->items == NULL) {
+        catalog->count = 0;
+        catalog->capacity = 0;
+        return -1;
+    }
+
+    catalog->count = 0;
+    catalog->capacity = initial_capacity;
+    return 0;
+}
 
 void print_movie(const Movie *movie) {
     if (movie == NULL) {
