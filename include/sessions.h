@@ -20,7 +20,7 @@ typedef struct {
     size_t count;
 } SessionSchedule;
 
-void print_session(const Session *session, int accumulated_audience);
-void print_schedule(const SessionSchedule *schedule);
+void print_session(Session *session, int accumulated_audience);
+void print_schedule(SessionSchedule *schedule);
 
 #endif
