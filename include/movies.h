@@ -3,12 +3,13 @@
 
 #include <stdint.h>
 
+#define MAX_MOVIES 50
+#define MAX_TITLE_LEN 100
+
 typedef struct {
     uint8_t id;
-    char *name;
+    char name[MAX_TITLE_LEN];
     uint8_t min_age;
-    uint8_t audience_count;
-    uint8_t weekday; 
 } Movie;
 
 void print_movie(Movie * movie);
