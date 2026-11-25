@@ -79,30 +79,20 @@ Movie *find_movie_by_id(MovieCatalog *catalog, int id) {
     return NULL;
 }
 
-Movie *find_movie_by_id_const(MovieCatalog *catalog, int id) {
-    if (catalog == NULL || id < 0) {
-        return NULL;
-    }
-
-    for (size_t i = 0; i < catalog->count; i++) {
-        if (catalog->items[i].id == id) {
-            return &catalog->items[i];
-        }
-    }
-    return NULL;
-}
-
 void print_movie(const Movie *movie) {
     if (movie == NULL) {
-        printf("Invalid movie (NULL)\n");
+        printf("Filme invalido (NULL)\n");
         return;
     }
 
-    printf("+----------------------------------+\n");
-    printf("| ID..............: %u\n",        movie->id);
-    printf("| Name............: %s\n",        movie->name ? movie->name : "(empty)");
-    printf("| Minimum age.....: %u years\n",  movie->min_age);
-    printf("| Audience count..: %u\n",        movie->audience_count);
-    printf("| Weekday.........: %u (%s)\n",   movie->weekday);
-    printf("+----------------------------------+\n");
+    printf("| ID...............: %d\n", movie->id);
+    printf("| Nome.............: %s\n", movie->name);
+    
+    if (movie->min_age == 0) {
+        printf("| Classificacao....: Livre\n");
+    } else {
+        printf("| Classificacao....: %d anos\n", movie->min_age);
+    }
+    
+    printf("| Publico total....: %d pessoas\n", movie->total_audience);
 }
