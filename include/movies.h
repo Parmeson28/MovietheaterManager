@@ -10,6 +10,7 @@ typedef struct {
     uint8_t id;
     char name[MAX_TITLE_LEN];
     uint8_t min_age;
+    uint16_t total_audience;
 } Movie;
 
 void print_movie(Movie * movie);
