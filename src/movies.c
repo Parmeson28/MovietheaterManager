@@ -66,6 +66,32 @@ int add_movie(MovieCatalog *catalog, char *name, int min_age) {
     return m->id;
 }
 
+Movie *find_movie_by_id(MovieCatalog *catalog, int id) {
+    if (catalog == NULL || id < 0) {
+        return NULL;
+    }
+
+    for (size_t i = 0; i < catalog->count; i++) {
+        if (catalog->items[i].id == id) {
+            return &catalog->items[i];
+        }
+    }
+    return NULL;
+}
+
+Movie *find_movie_by_id_const(MovieCatalog *catalog, int id) {
+    if (catalog == NULL || id < 0) {
+        return NULL;
+    }
+
+    for (size_t i = 0; i < catalog->count; i++) {
+        if (catalog->items[i].id == id) {
+            return &catalog->items[i];
+        }
+    }
+    return NULL;
+}
+
 void print_movie(const Movie *movie) {
     if (movie == NULL) {
         printf("Invalid movie (NULL)\n");
