@@ -87,20 +87,28 @@ int add_session(SessionSchedule *schedule, MovieCatalog *catalog, int movie_id, 
     
 }
 
-void print_session(const Session *session, const Movie *movie) {
+void print_session(Session *session, Movie *movie) {
     if (session == NULL) {
         return;
     }
 
-    const char *title = (movie != NULL) ? movie->name : "(Filme removido)";
+    char *title = (movie != NULL) ? movie->name : "(Filme removido)";
     int min_age = (movie != NULL) ? movie->min_age : 0;
 
-    printf("%-14s %-12d %-14s %02dh %10d pessoas %11d pessoas\n",
-           title,
-           min_age,
-           weekday_name(session->weekday),
-           session->start_hour,
-           session->audience,
-           session->accumulated_audience);
+    printf("%-14s %-12d %-14s %02dh %10d pessoas %11d pessoas\n", title, min_age, weekday_name(session->weekday), session->start_hour, session->audience, session->accumulated_audience);
 }
 
+void print_schedule(SessionSchedule *schedule, MovieCatalog *catalog) {
+    if (schedule == NULL || catalog == NULL) {
+        return;
+    }
+
+    printf("\nListagem de Sessoes de Cinema da Semana\n");
+    printf("%-14s %-12s %-14s %-8s %-19s %-19s\n", "Filme", "Idade Minima", "Dia da Semana", "Horario", "Publico da Sessao", "Publico Acumulado");
+
+    for (size_t i = 0; i < schedule->count; i++) {
+        Session *s = &schedule->items[i];
+        Movie *m = find_movie_by_id_const(catalog, s->movie_id);
+        print_session(s, m);
+    }
+}
