@@ -59,3 +59,30 @@ static int ensure_session_capacity(SessionSchedule *schedule) {
     schedule->capacity = new_capacity;
     return 0;
 }
+
+int add_session(SessionSchedule *schedule, MovieCatalog *catalog, int movie_id, int weekday, int start_hour, int audience) {
+    if(schedule == NULL) return -1;
+    if(catalog == NULL) return -1;
+
+    Movie *movie = find_movie_by_id(catalog, movie_id);
+    if (movie == NULL) return -2;
+
+    if(audience < 0) return -3;
+    if(weekday < 1 || weekday > 7) return -3;
+
+    if (ensure_session_capacity(schedule) != 0) return -1;
+    
+    movie->total_audience += audience;
+
+    Session *s = &schedule->items[schedule->count];
+    s->id = (int)schedule->count;
+    s->movie_id = movie->id;
+    s->weekday = weekday;
+    s->start_hour = start_hour;
+    s->audience = audience;
+    s->accumulated_audience = movie->total_audience;
+
+    schedule->count++;
+    return s->id;
+    
+}
