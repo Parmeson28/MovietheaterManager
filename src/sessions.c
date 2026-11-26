@@ -43,3 +43,19 @@ char *weekday_name(int weekday) {
         default: return "Desconhecido";
     }
 }
+
+static int ensure_session_capacity(SessionSchedule *schedule) {
+    if (schedule->count < schedule->capacity) {
+        return 0;
+    }
+
+    size_t new_capacity = schedule->capacity * 2;
+    Session *resized = realloc(schedule->items, new_capacity * sizeof(Session));
+    if (resized == NULL) {
+        return -1;
+    }
+
+    schedule->items = resized;
+    schedule->capacity = new_capacity;
+    return 0;
+}
