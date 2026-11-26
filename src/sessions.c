@@ -86,3 +86,21 @@ int add_session(SessionSchedule *schedule, MovieCatalog *catalog, int movie_id, 
     return s->id;
     
 }
+
+void print_session(const Session *session, const Movie *movie) {
+    if (session == NULL) {
+        return;
+    }
+
+    const char *title = (movie != NULL) ? movie->name : "(Filme removido)";
+    int min_age = (movie != NULL) ? movie->min_age : 0;
+
+    printf("%-14s %-12d %-14s %02dh %10d pessoas %11d pessoas\n",
+           title,
+           min_age,
+           weekday_name(session->weekday),
+           session->start_hour,
+           session->audience,
+           session->accumulated_audience);
+}
+
