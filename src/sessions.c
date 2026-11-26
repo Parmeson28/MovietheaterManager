@@ -19,3 +19,14 @@ int init_session_schedule(SessionSchedule *schedule, size_t initial_capacity) {
     return 0;
 }
 
+void free_session_schedule(SessionSchedule *schedule) {
+    if(schedule == NULL){
+        return;
+    }
+
+    free(schedule->items);
+    schedule->items = NULL;
+    schedule->count = 0;
+    schedule->capacity = 0;
+    
+}
